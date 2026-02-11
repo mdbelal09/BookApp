@@ -87,13 +87,4 @@ public class Book {
 	public void setAvaliable(boolean isAvaliable) {
 		this.isAvaliable = isAvaliable;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-
 }
