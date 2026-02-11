@@ -16,7 +16,7 @@ public class MainApp {
 		 
 		Book b=new Book();
 		b.setTitle("effective js ");
-		b.setAuthor("sam altman ");
+		b.setAuthor("md  belal ");
 		b.setDescription("a comprehensive guide to best practices.");
 		b.setPublicationDate(LocalDate.of(2011, 4, 6));
 		b.setIdentifier("ISBN-293");
