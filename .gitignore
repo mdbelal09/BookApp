@@ -1,0 +1,22 @@
+# Java build files
+/bin/
+/target/
+*.class
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# IntelliJ
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# Secrets
+.env
+application.properties
+application.yml
+db.properties
