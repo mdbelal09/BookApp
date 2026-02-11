@@ -16,10 +16,10 @@ public class MainApp {
 		 
 		Book b=new Book();
 		b.setTitle("effective js ");
-		b.setAuthor("kin bloch");
+		b.setAuthor("anwarul ");
 		b.setDescription("a comprehensive guide to best practices.");
 		b.setPublicationDate(LocalDate.of(2011, 4, 6));
-		b.setIdentifier("ISBN-199");
+		b.setIdentifier("ISBN-193");
 		b.setPrice(490.80);
 		b.setCategory("programing");
 		b.setAvaliable(false);
