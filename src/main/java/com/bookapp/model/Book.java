@@ -33,6 +33,7 @@ public class Book {
 ///-> getter & setter
 ///
 
+	public Book() {}
 	public int getId() {
 		return id;
 	}

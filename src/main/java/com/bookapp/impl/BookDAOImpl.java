@@ -4,6 +4,7 @@ import com.bookapp.model.Book;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
 public class BookDAOImpl {
@@ -15,11 +16,20 @@ public class BookDAOImpl {
 	///-> CREATE
 	public void createBook(Book book) {
 		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		em.persist(book);
-		em.getTransaction().commit();
-		em.close();
-
+		EntityTransaction tx=null;
+		try {
+			em.getTransaction().begin();
+			em.persist(book);
+			em.getTransaction().commit();
+			em.close();
+		}catch(Exception e) {
+			if(tx !=null && tx.isActive()) {
+				tx.rollback();
+			}
+			throw e;  ///-> rethrow for controller/service layer
+		}finally {
+			em.close();
+		}
 	}
 
 	///-> READ
