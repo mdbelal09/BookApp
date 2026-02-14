@@ -15,13 +15,13 @@ public class MainApp {
 		///-> save operation
 		 
 		Book b=new Book();
-		b.setTitle("effective js ");
-		b.setAuthor("mdbelal ");
-		b.setDescription("a comprehensive guide to best practices.");
-		b.setPublicationDate(LocalDate.of(2011, 4, 6));
-		b.setIdentifier("ISBN-295");
+		b.setTitle("effective REACT ");
+		b.setAuthor("REACT ");
+		b.setDescription("a  guide to best practices.");
+		b.setPublicationDate(LocalDate.of(2010, 3, 6));
+		b.setIdentifier("ISBN-195");
 		b.setPrice(490.80);
-		b.setCategory("programing");
+		b.setCategory("CODING");
 		b.setAvaliable(false);
 		dao.createBook(b);
 		System.out.println("book saved successfully! ID :"+b.getId());
@@ -35,7 +35,7 @@ public class MainApp {
 			System.out.println("Book update! new price : "+existingBook.getPrice());
 		}
 		
-		
+//		
 		///-> DELETE 
 		dao.deleteBook(2);
 		System.out.println("bool detials are deleted!");
