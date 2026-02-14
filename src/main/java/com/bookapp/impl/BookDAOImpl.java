@@ -1,6 +1,7 @@
 package com.bookapp.impl;
 
 import com.bookapp.model.Book;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -13,57 +14,57 @@ public class BookDAOImpl {
 
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("BookLibraryPU");
 
-	///-> CREATE
+	/// -> CREATE
 	public void createBook(Book book) {
 		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx=null;
+		EntityTransaction tx = null;
 		try {
 			em.getTransaction().begin();
 			em.persist(book);
 			em.getTransaction().commit();
 			em.close();
-		}catch(Exception e) {
-			if(tx !=null && tx.isActive()) {
+		} catch (Exception e) {
+			if (tx != null && tx.isActive()) {
 				tx.rollback();
 			}
-			throw e;  ///-> rethrow for controller/service layer
-		}finally {
+			throw e; /// -> re throw for controller/service layer
+		} finally {
 			em.close();
 		}
 	}
 
-	///-> READ
+	/// -> READ
 	public Book findBook(int id) {
 		EntityManager em = emf.createEntityManager();
-		Book b = em.find(Book.class, id);
+//		Book b = em.find(Book.class, id);
+		try {
+			return em.find(Book.class, id);
+
+		} finally {
+			em.close();
+		}
+	}
+
+	/// -> update
+	public void updateBook(Book book) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(book);
+		em.getTransaction().commit();
 		em.close();
 
-		return b;
+	}
 
-	}
-	
-	///-> update
-		public void updateBook(Book book) {
-			EntityManager em=emf.createEntityManager();
-			em.getTransaction().begin();
-			em.merge(book);
-			em.getTransaction().commit();
-			em.close();
-			
-		
-	}
-		
-		///-> DELELE
-		public void deleteBook(int id) {
-			EntityManager em=emf.createEntityManager();
-			em.getTransaction().begin();
-			Book book =em.find(Book.class, id);
-			if(book!=null) {
-				em.remove(book);
-			}
-			em.getTransaction().commit();
-			em.clear();
+	/// -> DELELE
+	public void deleteBook(int id) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Book book = em.find(Book.class, id);
+		if (book != null) {
+			em.remove(book);
 		}
-		
+		em.getTransaction().commit();
+		em.clear();
+	}
 
 }
