@@ -1,7 +1,7 @@
 package com.bookapp.impl;
 
 import com.bookapp.model.Book;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -48,10 +48,22 @@ public class BookDAOImpl {
 	/// -> update
 	public void updateBook(Book book) {
 		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		em.merge(book);
-		em.getTransaction().commit();
-		em.close();
+		try {
+			em=emf.createEntityManager();
+			em.getTransaction().begin();
+			
+			em.merge(book);
+			em.getTransaction().commit();
+		}catch(Exception e) {
+			if(em!=null && em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+			}
+			e.printStackTrace();
+		}finally {
+			if(em!=null) {
+				em.close();
+			}
+		}
 
 	}
 
